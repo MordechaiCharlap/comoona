@@ -13,3 +13,38 @@ datasource db {
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
+model User {
+  id       String   @id @default(cuid())
+  name     String
+  email    String   @unique
+  posts    Post[]
+  comments Comment[]
+}
+
+model SubForum {
+  id    String @id @default(cuid())
+  name  String @unique
+  posts Post[]
+}
+
+model Post {
+  id          String     @id @default(cuid())
+  title       String
+  content     String?
+  createdAt   DateTime   @default(now())
+  author      User       @relation(fields: [authorId], references: [id])
+  authorId    String
+  SubForum   SubForum  @relation(fields: [subForumId], references: [id])
+  subForumId String
+  comments    Comment[]
+}
+
+model Comment {
+  id       String   @id @default(cuid())
+  content  String
+  createdAt DateTime @default(now())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String
+}
