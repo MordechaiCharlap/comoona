@@ -2,6 +2,7 @@
 
 import { Container, Text, Button, ThemeToggle, Avatar } from "@/components";
 import { useTheme } from "@/providers/ThemeProvider";
+import Link from "next/link";
 
 export const Header = () => {
   const { theme } = useTheme();
@@ -18,13 +19,17 @@ export const Header = () => {
         <div className="flex items-center justify-between py-3">
           {/* Logo */}
           <div className="flex items-center gap-6">
-            <Text size="xl" weight="bold" className="cursor-pointer">
-              🌙 comoona
-            </Text>
+            <Link href="/">
+              <Text size="xl" weight="bold" className="cursor-pointer">
+                🌙 comoona
+              </Text>
+            </Link>
             
             {/* Navigation */}
             <nav className="hidden md:flex items-center gap-4">
-              <Button variant="ghost" size="sm">Home</Button>
+              <Link href="/">
+                <Button variant="ghost" size="sm">Home</Button>
+              </Link>
               <Button variant="ghost" size="sm">Popular</Button>
               <Button variant="ghost" size="sm">All</Button>
             </nav>

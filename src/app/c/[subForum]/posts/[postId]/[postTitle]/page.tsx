@@ -19,7 +19,7 @@ function formatTimeAgo(date: Date): string {
 }
 
 interface PostPageProps {
-  params: Promise<{ subForum: string; postId: string }>;
+  params: Promise<{ subForum: string; postId: string; postTitle: string }>;
 }
 
 export default async function PostPage({ params }: PostPageProps) {
@@ -87,22 +87,24 @@ export default async function PostPage({ params }: PostPageProps) {
                       </Link>
                     </div>
                   </div>
-
                   {/* Post Title */}
-                  <Text size="xl" weight="bold" className="text-right mb-3">
-                    {post.title}
-                  </Text>
+                  <div className="mb-3">
+                    <Text size="xl" weight="bold" className="text-right">
+                      {post.title}
+                    </Text>
+                  </div>
 
                   {/* Post Content */}
                   {post.content && (
-                    <Text
-                      variant="secondary"
-                      className="mb-4 text-right whitespace-pre-wrap"
-                    >
-                      {post.content}
-                    </Text>
+                    <div className="mb-4">
+                      <Text
+                        variant="secondary"
+                        className="text-right whitespace-pre-wrap block"
+                      >
+                        {post.content}
+                      </Text>
+                    </div>
                   )}
-
                   {/* Post Actions */}
                   <div className="flex items-center gap-4" dir="rtl">
                     <Button variant="ghost" size="sm">

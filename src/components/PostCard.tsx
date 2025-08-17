@@ -1,17 +1,20 @@
 "use client";
 
 import { Card, Text, Avatar, Button } from "@/components";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { PostWithData } from "@/types/database";
+import Link from "next/link";
 
 function formatTimeAgo(date: Date): string {
   const now = new Date();
-  const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
-  
+  const diffInHours = Math.floor(
+    (now.getTime() - date.getTime()) / (1000 * 60 * 60)
+  );
+
   if (diffInHours < 1) return "לפני פחות משעה";
   if (diffInHours === 1) return "לפני שעה";
   if (diffInHours < 24) return `לפני ${diffInHours} שעות`;
-  
+
   const diffInDays = Math.floor(diffInHours / 24);
   if (diffInDays === 1) return "לפני יום";
   return `לפני ${diffInDays} ימים`;
@@ -23,9 +26,16 @@ interface PostCardProps {
 
 export const PostCard = ({ post }: PostCardProps) => {
   const pathname = usePathname();
+  const router = useRouter();
   const isOnSubForumPage = pathname.startsWith(`/c/${post.SubForum.name}`);
+  
+  const handleCardClick = () => {
+    const postTitleSlug = post.title.replace(/\s+/g, '_');
+    router.push(`/c/${encodeURIComponent(post.SubForum.name)}/posts/${post.id}/${encodeURIComponent(postTitleSlug)}`);
+  };
+
   return (
-    <Card className="mb-4" padding="md" onClick={() => {}}>
+    <Card className="mb-4 cursor-pointer hover:opacity-90 transition-opacity" padding="md" onClick={handleCardClick}>
       <div className="flex gap-3" dir="rtl">
         {/* Content Section */}
         <div className="flex-1">
@@ -37,22 +47,26 @@ export const PostCard = ({ post }: PostCardProps) => {
             <Text>•</Text>
             {isOnSubForumPage ? (
               <div className="flex items-center gap-1">
-                <Text
-                  size="sm"
-                  weight="medium"
-                  className="hover:underline cursor-pointer"
-                >
-                  u/{post.author.name}
+                <Text size="sm" variant="muted">
+                  נכתב על ידי
                 </Text>
+                <Link href={`/u/${post.author.name}`} onClick={(e) => e.stopPropagation()}>
+                  <Text
+                    size="sm"
+                    weight="medium"
+                    className="hover:underline cursor-pointer"
+                  >
+                    u/{post.author.name}
+                  </Text>
+                </Link>
               </div>
             ) : (
-              <Text size="sm" variant="muted">
-                c/{post.SubForum.name}
-              </Text>
+              <Link href={`/c/${encodeURIComponent(post.SubForum.name)}`} onClick={(e) => e.stopPropagation()}>
+                <Text size="sm" variant="muted" className="hover:underline cursor-pointer">
+                  c/{post.SubForum.name}
+                </Text>
+              </Link>
             )}
-            <Text size="sm" variant="muted">
-              נכתב על ידי
-            </Text>
           </div>
 
           {/* Post Title */}

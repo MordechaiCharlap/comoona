@@ -7,39 +7,8 @@ import {
   Text,
   Button,
 } from "@/components";
-import { prisma } from "@/lib/prisma";
+import { getPosts } from "@/services";
 import { PostWithData } from "@/types/database";
-
-async function getPosts() {
-  return await prisma.post.findMany({
-    select: {
-      id: true,
-      title: true,
-      content: true,
-      upvotes: true,
-      downvotes: true,
-      createdAt: true,
-      author: {
-        select: {
-          name: true
-        }
-      },
-      SubForum: {
-        select: {
-          name: true
-        }
-      },
-      _count: {
-        select: {
-          comments: true
-        }
-      }
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-}
 
 export default async function Home() {
   const posts: PostWithData[] = await getPosts();

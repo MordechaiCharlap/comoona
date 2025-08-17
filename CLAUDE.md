@@ -64,8 +64,10 @@ Comment {
 - `/c` - SubForums listing page
 - `/c/[subForum]` - Individual subforum view
 - `/c/[subForum]/posts` - Posts in subforum
-- `/c/[subForum]/posts/[postId]` - Individual post view
+- `/c/[subForum]/posts/[postId]` - Individual post view (current implementation)
+- `/c/[subForum]/posts/[postId]/[postTitle]` - Individual post view (preferred URL structure with title, spaces as underscores)
 - `/c/[subForum]/posts/[postId]/comment` - Comment on post
+- `/u/[username]` - User profile page
 
 ### Theme System
 
