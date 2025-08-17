@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm:*)",
+      "Bash(npx prisma generate:*)",
+      "Bash(npx prisma migrate reset:*)",
+      "Bash(npx tsx:*)"
+    ],
+    "deny": []
+  }
+}
