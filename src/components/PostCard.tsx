@@ -28,14 +28,22 @@ export const PostCard = ({ post }: PostCardProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const isOnSubForumPage = pathname.startsWith(`/c/${post.SubForum.name}`);
-  
+
   const handleCardClick = () => {
-    const postTitleSlug = post.title.replace(/\s+/g, '_');
-    router.push(`/c/${encodeURIComponent(post.SubForum.name)}/posts/${post.id}/${encodeURIComponent(postTitleSlug)}`);
+    const postTitleSlug = post.title.replace(/\s+/g, "_");
+    router.push(
+      `/c/${encodeURIComponent(post.SubForum.name)}/posts/${
+        post.id
+      }/${encodeURIComponent(postTitleSlug)}`
+    );
   };
 
   return (
-    <Card className="mb-4 cursor-pointer hover:opacity-90 transition-opacity" padding="md" onClick={handleCardClick}>
+    <Card
+      className="mb-4 cursor-pointer hover:opacity-90 transition-opacity"
+      padding="md"
+      onClick={handleCardClick}
+    >
       <div className="flex gap-3" dir="rtl">
         {/* Content Section */}
         <div className="flex-1">
@@ -50,7 +58,10 @@ export const PostCard = ({ post }: PostCardProps) => {
                 <Text size="sm" variant="muted">
                   נכתב על ידי
                 </Text>
-                <Link href={`/u/${post.author.name}`} onClick={(e) => e.stopPropagation()}>
+                <Link
+                  href={`/u/${post.author.name}`}
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <Text
                     size="sm"
                     weight="medium"
@@ -61,8 +72,15 @@ export const PostCard = ({ post }: PostCardProps) => {
                 </Link>
               </div>
             ) : (
-              <Link href={`/c/${encodeURIComponent(post.SubForum.name)}`} onClick={(e) => e.stopPropagation()}>
-                <Text size="sm" variant="muted" className="hover:underline cursor-pointer">
+              <Link
+                href={`/c/${encodeURIComponent(post.SubForum.name)}`}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Text
+                  size="sm"
+                  variant="muted"
+                  className="hover:underline cursor-pointer"
+                >
                   c/{post.SubForum.name}
                 </Text>
               </Link>
@@ -86,12 +104,12 @@ export const PostCard = ({ post }: PostCardProps) => {
             <Button variant="ghost" size="sm">
               <Text size="sm">💬 {post._count.comments} תגובות</Text>
             </Button>
-            <Button variant="ghost" size="sm">
+            {/* <Button variant="ghost" size="sm">
               <Text size="sm">📤 שתף</Text>
-            </Button>
-            <Button variant="ghost" size="sm">
+            </Button> */}
+            {/* <Button variant="ghost" size="sm">
               <Text size="sm">💾 שמור</Text>
-            </Button>
+            </Button> */}
           </div>
         </div>
 

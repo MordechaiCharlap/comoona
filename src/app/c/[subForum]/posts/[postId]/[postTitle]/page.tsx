@@ -59,21 +59,6 @@ export default async function PostPage({ params }: PostPageProps) {
                     </Text>
                     <Text>•</Text>
                     <div className="flex items-center gap-1">
-                      <Text size="sm" variant="muted">
-                        נכתב על ידי
-                      </Text>
-                      <Link href={`/u/${post.author.name}`}>
-                        <Text
-                          size="sm"
-                          weight="medium"
-                          className="hover:underline cursor-pointer"
-                        >
-                          u/{post.author.name}
-                        </Text>
-                      </Link>
-                      <Text size="sm" variant="muted">
-                        ב
-                      </Text>
                       <Link
                         href={`/c/${encodeURIComponent(post.SubForum.name)}`}
                       >
@@ -86,6 +71,15 @@ export default async function PostPage({ params }: PostPageProps) {
                         </Text>
                       </Link>
                     </div>
+                    <Link href={`/u/${post.author.name}`}>
+                      <Text
+                        size="sm"
+                        weight="medium"
+                        className="hover:underline cursor-pointer"
+                      >
+                        u/{post.author.name}
+                      </Text>
+                    </Link>
                   </div>
                   {/* Post Title */}
                   <div className="mb-3">
@@ -110,12 +104,12 @@ export default async function PostPage({ params }: PostPageProps) {
                     <Button variant="ghost" size="sm">
                       <Text size="sm">💬 {post._count.comments} תגובות</Text>
                     </Button>
-                    <Button variant="ghost" size="sm">
+                    {/* <Button variant="ghost" size="sm">
                       <Text size="sm">📤 שתף</Text>
-                    </Button>
-                    <Button variant="ghost" size="sm">
+                    </Button> */}
+                    {/* <Button variant="ghost" size="sm">
                       <Text size="sm">💾 שמור</Text>
-                    </Button>
+                    </Button> */}
                   </div>
                 </div>
 

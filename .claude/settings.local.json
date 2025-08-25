@@ -8,7 +8,18 @@
       "Bash(npx tsc:*)",
       "Bash(npx eslint:*)",
       "Bash(npm run build:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(claude mcp:*)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+      "Bash(del query-subforums.js)",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__get-library-docs",
+      "Bash(cmd /c npx:*)",
+      "Bash(claude doctor)",
+      "Bash(npm install:*)"
     ],
     "deny": []
   }

@@ -8,3 +8,4 @@ export { Container } from "./Container";
 export { ThemeToggle } from "./ThemeToggle";
 export { PostCard } from "./PostCard";
 export { Header } from "./Header";
+export { AuthModal } from "./AuthModal";
