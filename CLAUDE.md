@@ -118,6 +118,7 @@ Import these reusable components from `components/`:
 - **Premium Feel** - Subtle shadows, proper spacing, clean typography
 - **Theme Support** - Support both dark and light modes seamlessly
 - **Consistent Spacing** - Use Tailwind spacing scale consistently
+- **Cursor Consistency** - Every clickable element must have `cursor-pointer` class
 
 #### Layout Rules
 

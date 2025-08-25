@@ -55,7 +55,7 @@ export const Button = ({
 
   return (
     <button
-      className={`rounded-lg font-medium transition-all hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed ${sizeClasses[size]} ${className}`}
+      className={`rounded-lg font-medium transition-all hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer ${sizeClasses[size]} ${className}`}
       style={getVariantStyles()}
       onClick={onClick}
       disabled={disabled}

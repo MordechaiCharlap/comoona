@@ -10,8 +10,8 @@ interface UserProfile {
   email: string
   name: string | null
   avatar_url: string | null
-  created_at: string
-  updated_at: string
+  created_at: Date
+  updated_at: Date
 }
 
 interface UserContextType {
@@ -32,7 +32,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     try {
       setLoading(true)
       const { data, error } = await supabase
-        .from('profiles')
+        .from('Profile')
         .select('*')
         .eq('id', userId)
         .single()
@@ -44,12 +44,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
           email: user?.email || '',
           name: user?.user_metadata?.name || user?.user_metadata?.full_name || null,
           avatar_url: user?.user_metadata?.avatar_url || null,
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
         }
 
         const { data: createdProfile, error: createError } = await supabase
-          .from('profiles')
+          .from('Profile')
           .insert([newProfile])
           .select()
           .single()
@@ -82,11 +80,11 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     try {
       const updatedProfile = {
         ...updates,
-        updated_at: new Date().toISOString(),
+        updated_at: new Date(),
       }
 
       const { data, error } = await supabase
-        .from('profiles')
+        .from('Profile')
         .update(updatedProfile)
         .eq('id', profile.id)
         .select()

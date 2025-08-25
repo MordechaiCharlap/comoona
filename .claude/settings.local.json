@@ -19,7 +19,10 @@
       "mcp__context7__get-library-docs",
       "Bash(cmd /c npx:*)",
       "Bash(claude doctor)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(set DIRECT_URL=postgresql://postgres.utnggdqpckjnhriyhopk:Thesearch566$$@aws-1-eu-north-1.pooler.supabase.com:5432/postgres)",
+      "Bash(cmd /c:*)",
+      "Bash(copy .env.local .env)"
     ],
     "deny": []
   }

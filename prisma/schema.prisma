@@ -16,6 +16,15 @@ model User {
   posts    Post[]
 }
 
+model Profile {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  name       String?
+  avatar_url String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
 model SubForum {
   id    String @id @default(cuid())
   name  String @unique

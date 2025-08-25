@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useTheme } from '@/providers/ThemeProvider'
-import { useAuth } from '@/contexts/AuthProvider'
+import { useAuth } from '@/providers/AuthProvider'
 import { Button } from './Button'
 import { Input } from './Input'
 
@@ -161,7 +161,7 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
             <Button
               onClick={() => handleSocialAuth('apple')}
               disabled={loading}
-              className="w-full flex items-center justify-center gap-3"
+              className="w-full flex items-center justify-center gap-3 cursor-pointer"
               variant="secondary"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -174,7 +174,7 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
             <Button
               onClick={() => handleSocialAuth('google')}
               disabled={loading}
-              className="w-full flex items-center justify-center gap-3"
+              className="w-full flex items-center justify-center gap-3 cursor-pointer"
               variant="secondary"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -224,7 +224,7 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
               <Button
                 onClick={switchToEmailSignUp}
                 disabled={loading || !email}
-                className="w-full"
+                className="w-full cursor-pointer"
               >
                 Continue with Email
               </Button>
@@ -260,7 +260,7 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
               <Button
                 onClick={handleEmailAuth}
                 disabled={loading}
-                className="w-full"
+                className="w-full cursor-pointer"
               >
                 {loading ? 'Loading...' : mode === 'sign-in' ? 'Sign In' : 'Create Account'}
               </Button>
@@ -280,7 +280,7 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
                 <button
                   onClick={switchToSignUp}
                   disabled={loading}
-                  className="font-medium hover:underline"
+                  className="font-medium hover:underline cursor-pointer"
                   style={{ color: theme.colors.primary }}
                 >
                   Sign up
@@ -292,7 +292,7 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
                 <button
                   onClick={switchToSignIn}
                   disabled={loading}
-                  className="font-medium hover:underline"
+                  className="font-medium hover:underline cursor-pointer"
                   style={{ color: theme.colors.primary }}
                 >
                   Sign in
@@ -306,7 +306,7 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
         <button
           onClick={handleClose}
           disabled={loading}
-          className="absolute top-4 right-4 p-1 rounded-full hover:opacity-70 transition-opacity"
+          className="absolute top-4 right-4 p-1 rounded-full hover:opacity-70 transition-opacity cursor-pointer"
           style={{ color: theme.colors.textSecondary }}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
