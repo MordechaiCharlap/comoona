@@ -3,7 +3,7 @@ import { UserProfileData } from "@/types/database";
 
 export async function getUserData(username: string): Promise<UserProfileData | null> {
   const decodedUsername = decodeURIComponent(username);
-  const user = await prisma.user.findFirst({
+  const user = await prisma.profile.findFirst({
     where: { name: decodedUsername },
     select: {
       id: true,

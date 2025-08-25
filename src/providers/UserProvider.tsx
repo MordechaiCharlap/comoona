@@ -28,45 +28,18 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(false)
   const { user, session } = useAuth()
 
-  const fetchProfile = async (userId: string) => {
+  const fetchProfile = async (userEmail: string) => {
     try {
       setLoading(true)
-      const { data, error } = await supabase
-        .from('Profile')
-        .select('*')
-        .eq('id', userId)
-        .single()
-
-      if (error && error.code === 'PGRST116') {
-        // Profile doesn't exist, create one
-        const newProfile = {
-          id: userId,
-          email: user?.email || '',
-          name: user?.user_metadata?.name || user?.user_metadata?.full_name || null,
-          avatar_url: user?.user_metadata?.avatar_url || null,
-        }
-
-        const { data: createdProfile, error: createError } = await supabase
-          .from('Profile')
-          .insert([newProfile])
-          .select()
-          .single()
-
-        if (createError) {
-          console.error('Error creating profile:', createError)
-          return
-        }
-
-        setProfile(createdProfile)
+      const response = await fetch(`/api/profile?email=${encodeURIComponent(userEmail)}`)
+      
+      if (!response.ok) {
+        console.error('Error fetching profile:', response.status)
         return
       }
 
-      if (error) {
-        console.error('Error fetching profile:', error)
-        return
-      }
-
-      setProfile(data)
+      const profileData = await response.json()
+      setProfile(profileData)
     } catch (error) {
       console.error('Error in fetchProfile:', error)
     } finally {
@@ -104,14 +77,14 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   }
 
   const refreshProfile = async () => {
-    if (user) {
-      await fetchProfile(user.id)
+    if (user?.email) {
+      await fetchProfile(user.email)
     }
   }
 
   useEffect(() => {
-    if (user) {
-      fetchProfile(user.id)
+    if (user?.email) {
+      fetchProfile(user.email)
     } else {
       setProfile(null)
       setLoading(false)

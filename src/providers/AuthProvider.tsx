@@ -22,6 +22,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
 
+  const ensureProfileExists = async (user: User) => {
+    try {
+      const response = await fetch('/api/profile/ensure', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: user.email!,
+          name: user.user_metadata?.full_name || user.user_metadata?.name || null,
+          avatar_url: user.user_metadata?.avatar_url || null
+        })
+      })
+
+      if (!response.ok) {
+        console.error('Error ensuring profile exists:', response.status)
+      }
+    } catch (error) {
+      console.error('Error ensuring profile exists:', error)
+    }
+  }
+
   useEffect(() => {
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -35,6 +57,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       async (event, session) => {
         setSession(session)
         setUser(session?.user ?? null)
+        
+        // Create profile if user signed in and doesn't exist
+        if (event === 'SIGNED_IN' && session?.user) {
+          await ensureProfileExists(session.user)
+        }
+        
         setLoading(false)
       }
     )
